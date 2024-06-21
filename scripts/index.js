@@ -89,13 +89,7 @@ function actualizarCarrito() {
     tbody.innerHTML = ''; // Limpiamos contenido existente
 
     productosSeleccionados.forEach(function(producto) {
-        var row = '<tr>' +
-                  '<td>' + producto.id + '</td>' +
-                  '<td><img src="' + obtenerImagenPokemon(producto.nombre) + '" alt="' + producto.nombre + '"></td>' +
-                  '<td>' + producto.nombre + '</td>' +
-                  '<td>' + producto.cantidad + '</td>' +
-                  '<td><button onclick="eliminarProducto(' + producto.id + ')">Eliminar</button></td>' +
-                  '</tr>';
+        var row = `<tr><td>${producto.id}</td><td><img src="${obtenerImagenPokemon(producto.nombre)}" alt="${producto.nombre}"></td><td>${producto.nombre}</td><td>${producto.cantidad}</td><td><button onclick="eliminarProducto(${producto.id})">Eliminar</button></td></tr>`;
         tbody.innerHTML += row;
     });
 }
@@ -138,7 +132,7 @@ async function generarFactura() {
     // Generar nombre de archivo CSV
     const filename = `Factura_${productosSeleccionados[0].nombreCliente.replace(/\s/g, '_')}.csv`;
 
-    // Crear enlace de descarga para el archivo CSV generado
+    // Crear enlace de descarga para el archivo CSV generado (opcional, para descarga directa)
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     if (navigator.msSaveBlob) { // IE 10+
         navigator.msSaveBlob(blob, filename);
