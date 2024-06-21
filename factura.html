@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Factura</h2>
+
+    <div id="facturaContainer">
+        <!-- Botón para cargar el archivo CSV -->
+        <input type="file" id="fileInput" accept=".csv">
+        <button onclick="mostrarFactura()">Mostrar Factura</button><br>
+        
+        <!-- Tabla donde se mostrará la factura -->
+        <table id="facturaTable">
+            <thead>
+                <tr>
+
+                </tr>
+            </thead>
+            <tbody id="facturaTableBody">
+                <!-- Aquí se añadirán las filas de la factura -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="scripts/factura.js"></script>
+</body>
+</html>

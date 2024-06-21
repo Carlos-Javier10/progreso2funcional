@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos desde la API de Pokémon</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Productos desde la API de Pokémon</h2>
+
+    <!-- Formulario para ingresar nombre y dirección del cliente -->
+    <form id="customerForm">
+        <label for="nombreCliente">Nombre del Cliente:</label>
+        <input type="text" id="nombreCliente" name="nombreCliente" required><br><br>
+        <label for="direccionCliente">Dirección del Cliente:</label>
+        <input type="text" id="direccionCliente" name="direccionCliente" required><br><br>
+    </form>
+
+    <!-- Carrito de Compras -->
+    <div id="carrito">
+        <h3>Carrito de Compras</h3>
+        <table id="carritoTable">
+            <thead>
+                <tr>
+                    <th>ID Producto</th>
+                    <th>Imagen</th>
+                    <th>Nombre del Pokémon</th>
+                    <th>Cantidad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="carritoTableBody">
+                <!-- Aquí se añadirán los productos seleccionados -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Tabla para mostrar productos -->
+    <h3>Lista de Productos</h3>
+    <table id="productTable">
+        <thead>
+            <tr>
+                <th>ID Producto</th>
+                <th>Imagen</th>
+                <th>Nombre del Pokémon</th>
+                <th>Cantidad</th>
+                <th>Stock</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="productTableBody">
+            <!-- Aquí se añadirán las filas de productos -->
+        </tbody>
+    </table>
+
+    <!-- Botón para seleccionar productos -->
+    <button onclick="seleccionarProductos()">Seleccionar</button>
+
+    <!-- Botón para generar CSV -->
+    <button onclick="generarFactura()">Generar Factura (CSV)</button>
+
+    <!-- Script para cargar datos desde la API de Pokémon -->
+    <script src="scripts/index.js"></script>
+</body>
+</html>
