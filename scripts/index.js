@@ -89,7 +89,13 @@ function actualizarCarrito() {
     tbody.innerHTML = ''; // Limpiamos contenido existente
 
     productosSeleccionados.forEach(function(producto) {
-        var row = `<tr><td>${producto.id}</td><td><img src="${obtenerImagenPokemon(producto.nombre)}" alt="${producto.nombre}"></td><td>${producto.nombre}</td><td>${producto.cantidad}</td><td><button onclick="eliminarProducto(${producto.id})">Eliminar</button></td></tr>`;
+        var row = '<tr>' +
+                  '<td>' + producto.id + '</td>' +
+                  '<td><img src="' + obtenerImagenPokemon(producto.nombre) + '" alt="' + producto.nombre + '"></td>' +
+                  '<td>' + producto.nombre + '</td>' +
+                  '<td>' + producto.cantidad + '</td>' +
+                  '<td><button onclick="eliminarProducto(' + producto.id + ')">Eliminar</button></td>' +
+                  '</tr>';
         tbody.innerHTML += row;
     });
 }
@@ -132,7 +138,7 @@ async function generarFactura() {
     // Generar nombre de archivo CSV
     const filename = `Factura_${productosSeleccionados[0].nombreCliente.replace(/\s/g, '_')}.csv`;
 
-    // Crear enlace de descarga para el archivo CSV generado (opcional, para descarga directa)
+    // Crear enlace de descarga para el archivo CSV generado
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     if (navigator.msSaveBlob) { // IE 10+
         navigator.msSaveBlob(blob, filename);
@@ -149,44 +155,7 @@ async function generarFactura() {
         }
     }
 
-    // Llamar a la función para enviar los datos a la base de datos
-    await enviarOrdenCompra();
 }
-
-// Función para enviar la orden de compra al backend
-async function enviarOrdenCompra() {
-    try {
-        // Construir el objeto de datos a enviar
-        const data = {
-            productos: productosSeleccionados
-        };
-
-        // Enviar la orden de compra al backend
-        const response = await fetch('/guardar_orden', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (response.ok) {
-            const result = await response.json();
-            console.log('Orden de compra enviada y guardada en la base de datos:', result);
-            alert('La orden de compra se ha guardado correctamente.');
-            // Limpiar carrito después de guardar la orden
-            productosSeleccionados = [];
-            actualizarCarrito(); // Actualizar la tabla del carrito vacía
-        } else {
-            console.error('Error al enviar la orden de compra:', response.statusText);
-            alert('Ocurrió un error al enviar la orden de compra.');
-        }
-    } catch (error) {
-        console.error('Error en la petición fetch:', error);
-        alert('Ocurrió un error en la petición para enviar la orden de compra.');
-    }
-}
-
 // Llamamos a la función para cargar los datos de la API de Pokémon al cargar la página
 window.onload = function() {
     obtenerDatosPokemon();
